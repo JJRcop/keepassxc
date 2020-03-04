@@ -1387,6 +1387,7 @@ bool DatabaseWidget::lock()
 
     // Don't try to lock the database while saving, this will cause a deadlock
     if (m_db->isSaving()) {
+        QTimer::singleShot(1000, this, SIGNAL(lock()));
         return false;
     }
 
